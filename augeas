@@ -35,7 +35,7 @@ options:
     required: false
     choices: [ set, ins, rm, match ]
     description:
-      - 'Whether given path should be modified, inserted, removed or matched. Command "match" passes results through "result" attribute - every item on this list is an object with "label" and "value" (check third example below). Other commands returns true in case of any modification (so this value is always equal to "changed" attribue - this make more sens in case of bulk execution)'
+      - 'Whether given path should be modified, inserted, removed or matched. Command "match" passes results through "result" attribute - every item on this list is an object with "label" and "value" (check third example below). Other commands returns true in case of any modification (so this value is always equal to "changed" attribute - this makes more sense in case of bulk execution)'
   path:
     required: false
     description:
@@ -56,7 +56,7 @@ options:
   commands:
     required: false
     description:
-      - 'Execute many commands at once (some configuration entries have to be created/updated at once - it is impossible to split them across multiple "set" calls). Standard shell quoting is allowed (rember to escape all quotes inside pahts/values - check last example). Expected formats: "set path value", "rm path" or "match path" (look into examples for more details). You can separate commands with any white chars (new lines, spaces etc.). Result is passed through "result" attribute and contains list of tuples: (command, command result).'
+      - 'Execute many commands at once (some configuration entries have to be created/updated at once - it is impossible to split them across multiple "set" calls). Standard shell quoting is allowed (rember to escape all quotes inside paths/values - check last example). Expected formats: "set path value", "rm path" or "match path" (look into examples for more details). You can separate commands with any white chars (new lines, spaces etc.). Result is passed through "result" attribute and contains list of tuples: (command, command result).'
   root:
     required: false
     description:
@@ -87,7 +87,7 @@ examples:
     description: "Bulk command execution."
 
   - code: |
-      - name: Redifine eth0 interface
+      - name: Redefine eth0 interface
         action:  augeas commands=\'rm /files/etc/network/interfaces/iface[.=\\"eth0\\"]
                                   set /files/etc/network/interfaces/iface[last()+1] eth0
                                   set /files/etc/network/interfaces/iface[.=\\"eth0\\"]/family inet
@@ -107,7 +107,7 @@ import re
 import shlex
 
 if augeas:
-    # Augeas C API `aug_span` function was introduced on the begining of 2011
+    # Augeas C API `aug_span` function was introduced on the beginning of 2011
     # but python-augeas 0.4 was released month before and doesn't contain bindings for it
     # This code is copied from current devel branch of python-augeas
 
@@ -428,7 +428,7 @@ def main():
             where=dict(default=None),
             label=dict(default=None),
             lens=dict(default=None),
-            file=dict(defulat=None),
+            file=dict(default=None),
             filter=dict(default=None)
         ),
         mutually_exclusive=[['commands', 'command'], ['commands', 'value'],
