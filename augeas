@@ -403,7 +403,7 @@ def execute(augeas_instance, commands):
             lens = params['lens']
             file_ = params['file']
             excl = params['filter'] == 'excl'
-            augeas_instance.transform(lens, file_, excl)
+            augeas_instance.add_transform(lens, file_, excl)
         elif command == 'load':
             augeas_instance.load()
         else: # match
